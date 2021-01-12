@@ -104,7 +104,7 @@ float get_absolute_position(AxisEnum axis) {
   return float(absolute_position[axis] / axis_steps_per_unit[axis]);
 }
 
-float set_absolute_position(AxisEnum axis,float position) {
+float set_absolute_position(AxisEnum axis, float position) {
   absolute_position[axis] = position*axis_steps_per_unit[axis];
 }
 
@@ -315,7 +315,6 @@ inline void update_endstops() {
   #define _ENDSTOP_HIT(AXIS) endstop_hit_bits |= BIT(_ENDSTOP(AXIS, MIN))
   #define _ENDSTOP(AXIS, MINMAX) AXIS ##_## MINMAX
   #define _ENDSTOPVALUE(AXIS, MINMAX) AXIS ##_## MINMAX##_POS
-
   // SET_ENDSTOP_BIT: set the current endstop bits for an endstop to its status
   #define SET_ENDSTOP_BIT(AXIS, MINMAX) SET_BIT(current_endstop_bits, _ENDSTOP(AXIS, MINMAX), (READ(_ENDSTOP_PIN(AXIS, MINMAX)) != _ENDSTOP_INVERTING(AXIS, MINMAX)))
   // COPY_BIT: copy the value of COPY_BIT to BIT in bits
@@ -616,9 +615,9 @@ ISR(TIMER1_COMPA_vect) {
   if (cleaning_buffer_counter) {
     current_block = NULL;
     plan_discard_current_block();
-   //#ifdef SD_FINISHED_RELEASECOMMAND
-   //  if ((cleaning_buffer_counter == 1) && (SD_FINISHED_STEPPERRELEASE)) enqueuecommands_P(PSTR(SD_FINISHED_RELEASECOMMAND));
-   //#endif
+    //#ifdef SD_FINISHED_RELEASECOMMAND
+    //  if ((cleaning_buffer_counter == 1) && (SD_FINISHED_STEPPERRELEASE)) enqueuecommands_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+    //#endif
     cleaning_buffer_counter--;
     OCR1A = 400;
     return;

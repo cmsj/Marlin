@@ -191,8 +191,9 @@
       #define DOGLCD_CS  25         //LCD_CS
       #define BTN_EN1 31
       #define BTN_EN2 33
-      #define BTN_ENC 35  //the click switch
+      #define BTN_ENC 35       //the click switch
       #define SD_DETECT_PIN 49       // SD_DET
+
     #else
 
       #define BEEPER_PIN 33  // Beeper on AUX-4

@@ -155,6 +155,7 @@ uint8_t const SD_CARD_TYPE_SDHC = 3;
  */
 class Sd2Card {
  public:
+
   bool writemultipleblock (const uint8_t *buff,uint32_t sector,uint16_t count);
   bool readmultipleblock (uint8_t *buff,uint32_t sector,uint16_t count);
   /** Construct an instance of Sd2Card. */

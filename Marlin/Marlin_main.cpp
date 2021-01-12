@@ -616,7 +616,7 @@ void servo_init() {
 
 void cancel_gohome(void) {
   if (cancel_print == 0) return;
-  if (cancel_gohome_ms>millis()) return;
+  if (cancel_gohome_ms > millis()) return;
 
   cancel_print = 0;
   if (IsRunning()) {
@@ -647,19 +647,19 @@ void cancel_gohome(void) {
  */
 void setup() {
   pinMode(PRINT_LED, OUTPUT);
-  pinMode(PRINT_START_PIN,INPUT_PULLUP);
+  pinMode(PRINT_START_PIN, INPUT_PULLUP);
 
-  pinMode(FEED_PIN,INPUT_PULLUP);
+  pinMode(FEED_PIN, INPUT_PULLUP);
   pinMode(FEED_LED, OUTPUT);
-  WRITE(FEED_LED,1);
+  WRITE(FEED_LED, 1);
 
-  pinMode(RETRACT_PIN,INPUT_PULLUP);
+  pinMode(RETRACT_PIN, INPUT_PULLUP);
   pinMode(RETRACT_LED, OUTPUT);
-  WRITE(RETRACT_LED,1);
+  WRITE(RETRACT_LED, 1);
 
-  pinMode(Z_HOME_PIN,INPUT_PULLUP);
-  pinMode(HOME_LED,OUTPUT);
-  WRITE(HOME_LED,1);
+  pinMode(Z_HOME_PIN, INPUT_PULLUP);
+  pinMode(HOME_LED, OUTPUT);
+  WRITE(HOME_LED, 1);
 
   BLINK_LED(4000);
 
@@ -764,6 +764,7 @@ void loop() {
   #endif
 
   if (commands_in_queue) {
+
     protect_time = millis();
 
     #if ENABLED(SDSUPPORT)
@@ -816,7 +817,7 @@ void gcode_line_error(const char* err, bool doFlush = true) {
  *  - The SD card file being actively printed
  */
 
-void clear_command(){
+void clear_command() {
   MYSERIAL.flush();
 
   serial_count = 0;
@@ -2278,9 +2279,9 @@ inline void gcode_G28() {
     }
   #endif
 
-  bool  homeX = code_seen(axis_codes[X_AXIS]),
-        homeY = code_seen(axis_codes[Y_AXIS]),
-        homeZ = code_seen(axis_codes[Z_AXIS]);
+  bool homeX = code_seen(axis_codes[X_AXIS]),
+       homeY = code_seen(axis_codes[Y_AXIS]),
+       homeZ = code_seen(axis_codes[Z_AXIS]);
   home_all_axis = (!homeX && !homeY && !homeZ) || (homeX && homeY && homeZ);
 
   // Wait for planner moves to finish!
@@ -2485,7 +2486,6 @@ inline void gcode_G28() {
 
             current_position[Z_AXIS] = 0;
             sync_plan_position();
-
             //
             // Set the Z probe (or just the nozzle) destination to the safe homing point
             //
@@ -2575,7 +2575,7 @@ inline void gcode_G28() {
 
         #else // !Z_SAFE_HOMING
 
-          HOMEAXIS(Z); //Z轴归零
+                       HOMEAXIS(Z); //Z轴归零
 
         #endif // !Z_SAFE_HOMING
 
