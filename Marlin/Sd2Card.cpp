@@ -21,7 +21,6 @@
 
 #if ENABLED(SDSUPPORT)
 #include "Sd2Card.h"
-
 //------------------------------------------------------------------------------
 #if DISABLED(SOFTWARE_SPI)
   // functions for hardware SPI
@@ -66,8 +65,6 @@
     SPDR = b;
     while (!TEST(SPSR, SPIF)) { /* Intentionally left empty */ }
   }
-  
-  
   //------------------------------------------------------------------------------
   /** SPI send block - only one call so force inline */
   static inline __attribute__((always_inline))
@@ -150,20 +147,17 @@
       spiSend(buf[i]);
   }
 #endif  // SOFTWARE_SPI
-
-
-
 //------------------------------------------------------------------------------
 // send command and return error code.  Return zero for OK
 uint8_t Sd2Card::cardCommand(uint8_t cmd, uint32_t arg) {
   // select card
-  chipSelectLow(); 
+  chipSelectLow();
 
   // wait up to 300 ms if busy
   waitNotBusy(300);
 
   // send command
-  spiSend(cmd | 0x40);  //ÃüÁîÖµ
+  spiSend(cmd | 0x40);
 
   // send argument
   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
@@ -172,7 +166,7 @@ uint8_t Sd2Card::cardCommand(uint8_t cmd, uint32_t arg) {
   uint8_t crc = 0XFF;
   if (cmd == CMD0) crc = 0X95;  // correct crc for CMD0 with arg 0
   if (cmd == CMD8) crc = 0X87;  // correct crc for CMD8 with arg 0X1AA
-  spiSend(crc);  //CRCÐ£Ñé
+  spiSend(crc);
 
   // skip stuff byte for stop read
   if (cmd == CMD12) spiRec();
@@ -181,8 +175,6 @@ uint8_t Sd2Card::cardCommand(uint8_t cmd, uint32_t arg) {
   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++) { /* Intentionally left empty */ }
   return status_;
 }
-
-
 //------------------------------------------------------------------------------
 /**
  * Determine the size of an SD flash memory card.
@@ -587,7 +579,6 @@ uint16_t count			/* Sector count (1..128) */
 	chipSelectHigh();
 	return 0;
 }
-
 
 //------------------------------------------------------------------------------
 /**
