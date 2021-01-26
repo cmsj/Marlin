@@ -2576,7 +2576,7 @@ inline void gcode_G28() {
 
         #else // !Z_SAFE_HOMING
 
-            HOMEAXIS(Z);
+          HOMEAXIS(Z);
 
         #endif // !Z_SAFE_HOMING
 
